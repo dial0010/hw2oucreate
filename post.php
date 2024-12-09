@@ -2,35 +2,32 @@
 $pageTitle = "Post";
 include "view-header.php";
 ?>
-    <h1>Post</h1>
-    <form method="post" action="post-result.php" onsubmit="return validateForm()">
-      <input type="text" name="my-name" id="my-name" oninput="countCharacters()" placeholder="Enter your name">
-      <span id="char-count">0</span>/50 characters
-      <input type="submit" value="Post data">
-    </form>
+    <div class="container">
+        <h1>Post</h1>
+        <form id="postForm" method="post" action="post-result.php">
+          <div class="mb-3">
+            <label for="my-name" class="form-label">Your Name</label>
+            <input type="text" class="form-control" id="my-name" name="my-name" placeholder="Enter your name" oninput="countCharacters()" required>
+            <div id="char-count" class="form-text">0/50 characters</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
 
     <script>
-      function validateForm() {
-        const nameInput = document.getElementById('my-name');
-        if (nameInput.value.trim() === "") {
-          alert("Please enter your name.");
-          return false;
-        }
-        return true;
-      }
-
+      // Function to count characters
       function countCharacters() {
         const nameInput = document.getElementById('my-name');
         const charCount = nameInput.value.length;
-        document.getElementById('char-count').textContent = charCount;
+        document.getElementById('char-count').textContent = `${charCount}/50 characters`;
       }
 
-      // Confirm before form submission
-      document.querySelector("form").addEventListener("submit", function() {
-        if (confirm("Are you sure you want to submit this form?")) {
-          return true;
-        } else {
-          return false;
+      // Function to validate the form before submitting
+      document.getElementById('postForm').addEventListener('submit', function(event) {
+        const nameInput = document.getElementById('my-name');
+        if (nameInput.value.trim() === "") {
+          event.preventDefault();
+          alert('Please enter your name before submitting.');
         }
       });
     </script>
