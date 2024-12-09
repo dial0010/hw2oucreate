@@ -2,17 +2,21 @@
 $pageTitle = "Get result";
 include "view-header.php";
 ?>
-    <h1>Post result</h1>
+    <h1>Get result</h1>
+    <div id="get-result">
+        <?php
+        if (isset($_GET['my-name'])) {
+            echo "<p>The value sent is:</p>" . $_GET['my-name'];
+        } else {
+            echo "<p>Nothing sent to the page.</p>";
+        }
+        ?>
+    </div>
+
+    <script>
+      // Additional JavaScript logic can be added here if needed.
+    </script>
+
 <?php
-if (isset($_GET['my-name'])) {
-?>
-  <p>The value sent is:</p>
-<?php
-  echo $_GET['my-name'];
-} else {
-  ?>
-  <p>Nothing sent to the page.</p>
-<?php
-} 
 include "view-footer.php";
 ?>
